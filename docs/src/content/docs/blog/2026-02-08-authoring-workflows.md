@@ -102,7 +102,7 @@ Select from the [12 design patterns](03-design-patterns.md) and [9 operational p
 → Quality Guardian + Network Restricted
 
 **For complex improvements:**
-→ Multi-Phase Improver + ResearchPlanAssign
+→ Multi-Phase Improver + TaskOps
 
 **For ecosystem management:**
 → Meta-Agent Optimizer + Meta-Agent Orchestrator

@@ -41,7 +41,7 @@ This ensures recently updated modules get reviewed first since new features migh
 
 For each module, Go Fan researches the repository (releases, docs, best practices), analyzes actual usage patterns using Serena, and generates actionable recommendations. It saves summaries under `scratchpad/mods/` and opens GitHub Discussions.
 
-The output of Go Fan is a discussion, which is then often "task mined" for actionable tasks using the [TaskOps](https://github.github.com/gh-aw/patterns/taskops/).
+The output of Go Fan is a discussion, which is then often "task mined" for actionable tasks using the [TaskOps](https://github.github.com/gh-aw/patterns/taskops/) design pattern.
 
 Let's take a look at an example of how this works:
 
@@ -67,7 +67,7 @@ Let's take a look at an example of this in practice:
 - Peli request `/plan` on that issue, causing the Plan agent to do further research and create 5 issues for work to be done such as [Create unified ToolsConfig struct in tools_types.go](https://github.com/github/gh-aw/issues/4155).
 - 4/5 of these issues were then solved by Copilot. For example [Add unified ToolsConfig struct to replace map[string]any pattern](https://github.com/github/gh-aw/pull/4158).
 
-Today's hybrid languages like Go, C# and F# support both strong and dynamic typing. Seeing strong typing as arising from continuous improvement area is a particularly novel insight: rather than enforcing strict typing upfront, we can develop quickly with flexibility, then let autonomous agents like Typist trail behind, strengthening type safety over time.
+The static v. dynamic typing debate has raged for decades. Today's hybrid languages like Go, C# and F# support both strong and dynamic typing. Continuous typing improvement offers **a new and refreshing perspective on this old debate**: rather than enforcing strict typing upfront, we can develop quickly with flexibility, then let autonomous agents like Typist trail behind, strengthening type safety over time. This allows us to get the best of both worlds: rapid development without getting bogged down in type design, while still achieving strong typing and safety as the codebase matures.
 
 ### Functional Pragmatist: The Pragmatic Purist 🔄
 

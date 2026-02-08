@@ -267,7 +267,7 @@ Note: Output can be filtered using the jq parameter.`,
 	}
 
 	// Generate schema with elicitation defaults
-	compileSchema, err := GenerateOutputSchema[compileArgs]()
+	compileSchema, err := GenerateSchema[compileArgs]()
 	if err != nil {
 		mcpLog.Printf("Failed to generate compile tool schema: %v", err)
 		return server
@@ -437,7 +437,7 @@ Note: Output can be filtered using the jq parameter.`,
 	}
 
 	// Generate schema with elicitation defaults
-	logsSchema, err := GenerateOutputSchema[logsArgs]()
+	logsSchema, err := GenerateSchema[logsArgs]()
 	if err != nil {
 		mcpLog.Printf("Failed to generate logs tool schema: %v", err)
 		return server
@@ -613,6 +613,13 @@ to filter the output to a manageable size, or adjust the 'max_tokens' parameter.
 		JqFilter   string `json:"jq,omitempty" jsonschema:"Optional jq filter to apply to JSON output"`
 	}
 
+	// Generate schema for audit tool
+	auditSchema, err := GenerateSchema[auditArgs]()
+	if err != nil {
+		mcpLog.Printf("Failed to generate audit tool schema: %v", err)
+		return server
+	}
+
 	mcp.AddTool(server, &mcp.Tool{
 		Name: "audit",
 		Description: `Investigate a workflow run, job, or specific step and generate a concise report.
@@ -641,6 +648,7 @@ Returns JSON with the following structure:
 - firewall_analysis: Network firewall analysis if available (total_requests, allowed_requests, blocked_requests, allowed_domains, blocked_domains)
 
 Note: Output can be filtered using the jq parameter.`,
+		InputSchema: auditSchema,
 		Icons: []mcp.Icon{
 			{Source: "🔍"},
 		},

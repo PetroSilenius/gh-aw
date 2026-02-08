@@ -27,7 +27,7 @@ GitHub Agentic Workflows deliver this: repository automation, running the coding
 
 GitHub Copilot, Claude by Anthropic or OpenAI Codex for automated, recurring and scheduled jobs to improve, document, test and analyze your repository. Augment CI/CD with Continuous AI - systematic, automated application of AI to software collaboration.
 
-Designed to augment your existing, deterministic CI/CD with [Continuous AI](https://githubnext.com/projects/continuous-ai) capabilities, GitHub Agentic Workflows has been developed by GitHub Next and Microsoft Research with security in mind. Agentic workflows run with minimal permissions by default, with explicit allowlisting for write operations and sandboxed execution to help keep your repository safe.
+Designed to augment your existing, deterministic CI/CD with [Continuous AI](https://githubnext.com/projects/continuous-ai) capabilities, GitHub Agentic Workflows has been developed by GitHub Next and Microsoft Research with guardrails in mind. Agentic workflows run with minimal permissions by default, with explicit allowlisting for write operations and sandboxed execution to help keep your repository safe.
 
 ## Key Features
 
@@ -52,7 +52,7 @@ Designed to augment your existing, deterministic CI/CD with [Continuous AI](http
   </FeatureCard>
 </FeatureGrid>
 
-### Security Built-In
+### Guardrails Built-In
 
 Workflows run with read-only permissions by default. Write operations require explicit approval through sanitized [safe outputs](/gh-aw/reference/glossary/#safe-outputs) (pre-approved GitHub operations), with sandboxed execution, tool allowlisting, and network isolation ensuring AI agents operate within controlled boundaries.
 
@@ -60,7 +60,7 @@ Workflows run with read-only permissions by default. Write operations require ex
 
 **How they work:**
 1. **Write** - Create a `.md` file with your automation instructions in natural language
-2. **Compile** - Run `gh aw compile` to transform it into a secure GitHub Actions workflow (`.lock.yml`)
+2. **Compile** - Run `gh aw compile` to transform it into a GitHub Actions workflow with guardrails (`.lock.yml`)
 3. **Run** - GitHub Actions executes your workflow automatically based on your triggers
 
 Here's a simple workflow that runs daily to create an upbeat status report:

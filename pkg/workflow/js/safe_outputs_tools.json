@@ -804,8 +804,11 @@
           "description": "Type of item to add to the project. Use 'issue' or 'pull_request' to add existing repo content, or 'draft_issue' to create a draft item inside the project. Required when operation is not specified."
         },
         "content_number": {
-          "type": "number",
-          "description": "Issue or pull request number to add to the project. This is the numeric ID from the GitHub URL (e.g., 123 in github.com/owner/repo/issues/123 for issue #123, or 456 in github.com/owner/repo/pull/456 for PR #456). Required when content_type is 'issue' or 'pull_request'."
+          "type": [
+            "number",
+            "string"
+          ],
+          "description": "Issue or pull request number to add to the project. This is the numeric ID from the GitHub URL (e.g., 123 in github.com/owner/repo/issues/123 for issue #123, or 456 in github.com/owner/repo/pull/456 for PR #456), or a temporary ID from a recent create_issue call (e.g., 'aw_abc123def456' or '#aw_abc123def456'). Required when content_type is 'issue' or 'pull_request'."
         },
         "draft_title": {
           "type": "string",
@@ -947,8 +950,8 @@
         },
         "item_url": {
           "type": "string",
-          "pattern": "^https://github\\\\.com/[^/]+/[^/]+/issues/\\\\d+$",
-          "description": "Optional GitHub issue URL to add as the first item to the project (e.g., 'https://github.com/owner/repo/issues/123')."
+          "pattern": "^(https://github\\\\.com/[^/]+/[^/]+/issues/(\\\\d+|#?aw_[0-9a-f]{12})|#?aw_[0-9a-f]{12})$",
+          "description": "Optional GitHub issue URL or temporary ID to add as the first item to the project. Accepts either a full URL (e.g., 'https://github.com/owner/repo/issues/123'), a URL with temporary ID (e.g., 'https://github.com/owner/repo/issues/aw_abc123def456'), or a plain temporary ID (e.g., 'aw_abc123def456' or '#aw_abc123def456') from a previously created issue in the same workflow run."
         },
         "temporary_id": {
           "type": "string",

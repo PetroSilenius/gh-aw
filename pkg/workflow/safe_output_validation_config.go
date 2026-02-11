@@ -236,7 +236,7 @@ var ValidationConfig = map[string]TypeValidationConfig{
 		Fields: map[string]FieldValidation{
 			"project":        {Required: true, Type: "string", Sanitize: true, MaxLength: 512, Pattern: "^https://github\\.com/(orgs|users)/[^/]+/projects/\\d+", PatternError: "must be a full GitHub project URL (e.g., https://github.com/orgs/myorg/projects/42)"},
 			"content_type":   {Type: "string", Enum: []string{"issue", "pull_request", "draft_issue"}},
-			"content_number": {OptionalPositiveInteger: true},
+			"content_number": {IssueNumberOrTemporaryID: true},
 			"issue":          {OptionalPositiveInteger: true}, // Legacy
 			"pull_request":   {OptionalPositiveInteger: true}, // Legacy
 			"draft_title":    {Type: "string", Sanitize: true, MaxLength: 256},
@@ -250,7 +250,7 @@ var ValidationConfig = map[string]TypeValidationConfig{
 			"title":      {Type: "string", Sanitize: true, MaxLength: 256},
 			"owner":      {Type: "string", Sanitize: true, MaxLength: 128},
 			"owner_type": {Type: "string", Enum: []string{"org", "user"}},
-			"item_url":   {Type: "string", Sanitize: true, MaxLength: 512, Pattern: "^https://github\\.com/[^/]+/[^/]+/issues/\\d+", PatternError: "must be a full GitHub issue URL (e.g., https://github.com/owner/repo/issues/123)"},
+			"item_url":   {Type: "string", Sanitize: true, MaxLength: 512},
 		},
 	},
 	"create_project_status_update": {

@@ -382,7 +382,7 @@ function extractTemporaryIdReferences(message) {
   }
 
   // Check direct ID reference fields
-  const idFields = ["parent_issue_number", "sub_issue_number", "issue_number", "discussion_number", "pull_request_number"];
+  const idFields = ["parent_issue_number", "sub_issue_number", "issue_number", "discussion_number", "pull_request_number", "content_number"];
 
   for (const field of idFields) {
     const value = message[field];
@@ -393,6 +393,32 @@ function extractTemporaryIdReferences(message) {
 
       if (isTemporaryId(valueWithoutHash)) {
         tempIds.add(normalizeTemporaryId(valueWithoutHash));
+      }
+    }
+  }
+
+  // Check URL fields that may contain temporary IDs instead of issue numbers
+  // Format: https://github.com/owner/repo/issues/#aw_XXXXXXXXXXXX or just #aw_XXXXXXXXXXXX
+  const urlFields = ["item_url"];
+
+  for (const field of urlFields) {
+    const value = message[field];
+    if (value !== undefined && value !== null && typeof value === "string") {
+      // Extract potential temporary ID from URL or plain ID
+      // Match: https://github.com/owner/repo/issues/#aw_XXXXXXXXXXXX or #aw_XXXXXXXXXXXX
+      const urlMatch = value.match(/issues\/(#?aw_[0-9a-f]{12})\s*$/i);
+      if (urlMatch) {
+        const valueWithoutHash = urlMatch[1].startsWith("#") ? urlMatch[1].substring(1) : urlMatch[1];
+        if (isTemporaryId(valueWithoutHash)) {
+          tempIds.add(normalizeTemporaryId(valueWithoutHash));
+        }
+      } else {
+        // Also check if the entire value is a temporary ID (with or without #)
+        const valueStr = String(value).trim();
+        const valueWithoutHash = valueStr.startsWith("#") ? valueStr.substring(1) : valueStr;
+        if (isTemporaryId(valueWithoutHash)) {
+          tempIds.add(normalizeTemporaryId(valueWithoutHash));
+        }
       }
     }
   }
